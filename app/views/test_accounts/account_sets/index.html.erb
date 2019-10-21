@@ -1,0 +1,13 @@
+<h1>Test Accounts</h1>
+
+<% if TestAccounts.config.support_email %>
+  For any questions / issues regarding test accounts, please don't hesitate to reach out to <%= TestAccounts.config.support_email %>
+<% end %>
+
+<% if @account_sets.size.zero? %>
+  <p>No Account Sets</p>
+<% else %>
+  <% @account_sets.each do |account_set| %>
+    <%= render "account_set", account_set: account_set %>
+  <% end %>
+<% end %>

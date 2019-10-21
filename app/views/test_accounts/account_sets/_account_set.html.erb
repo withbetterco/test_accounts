@@ -1,0 +1,36 @@
+<% if account_set.options.key?(:name) %>
+  <h2><%= account_set.options[:name] %></h2>
+<% end %>
+
+<% if account_set.options.key?(:description) %>
+  <p><%= account_set.options[:description] %></p>
+<% end %>
+
+<% if account_set.options.key?(:email_login_link) && account_set.options.key?(:email_login_password) %>
+  <h4>Email Login details</h4>
+  <p><a href="<%= account_set.options[:email_login_link] %>"><%= account_set.options[:email_login_link] %></a></p>
+  <p>Password*: <em><%= account_set.options[:email_login_password] %></em></p>
+  <p><small>* Use this password to log in with any account from this account list</small>
+<% end %>
+
+<% if account_set.options.key?(:token_login_link) && account_set.options.key?(:token_login_code) %>
+  <h4>Token Login details</h4>
+  <p><a href="<%= account_set.options[:token_login_link] %>"><%= account_set.options[:token_login_link] %></a></p>
+  <p>Code/Pin*: <em><%= account_set.options[:token_login_code] %></em></p>
+  <p><small>* Use this code/pin to log in with any account from this account list</small>
+<% end %>
+
+<table>
+  <tr>
+    <% account_set.attributes.each do |attribute| %>
+      <th><%= attribute %></th>
+    <% end %>
+  </tr>
+  <% account_set.resources.each do |resource| %>
+    <tr>
+      <% account_set.attributes.each do |attribute| %>
+        <th><%= resource.send(attribute) %></th>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
