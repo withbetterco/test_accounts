@@ -2,7 +2,7 @@ module TestAccounts
   class AccountSet
     attr_accessor :resources, :attributes, :options
 
-    def initialize(resource, scope = "", attributes = [], options = {})
+    def initialize(resource, scope = "all", attributes = [], options = {})
       @resource = resource
       @scope = scope
       @attributes = attributes
@@ -10,7 +10,6 @@ module TestAccounts
     end
 
     def resources
-      @resource.constantize.all unless @scope.present?
       @resource.constantize.send(@scope)
     end
 
