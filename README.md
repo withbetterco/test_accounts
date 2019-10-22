@@ -29,8 +29,24 @@ $ rails g test_accounts:views
 Override any of these defaults in `config/initializers/test_accounts.rb`:
 
 ```
-# TestAccounts Config
-  TestAccounts.configure do
+# Create account sets
+# admins_account_set = TestAccounts::AccountSet.new(
+#   "User",
+#   "admin",
+#   ["email"],
+#   name: "Admins",
+#   email_login_password: "password",
+#   email_login_link: "https://your-staging-site/users/sign_in"
+# )
+#
+# Add account sets to the page listing test accounts
+# self.account_sets << admins_account_set
+
+TestAccounts.configure do
+  self.account_sets = []
+  self.basic_authentication_username = "test_accounts"
+  self.basic_authentication_password = "test_accounts"
+  self.support_email = nil
 end
 ```
 
@@ -45,7 +61,7 @@ end
       ["name", "email"],
       name: "Admins",
       email_login_password: "password",
-      email_login_link: "https://main-street-staging.herokuapp.com/users/sign_in"
+      email_login_link: "https://your-staging-site/users/sign_in"
     )
     
     members_account_set = TestAccounts::AccountSet.new(
@@ -54,7 +70,7 @@ end
       ["name", "email"],
       name: "Members",
       email_login_password: "password",
-      email_login_link: "https://main-street-staging.herokuapp.com/users/sign_in"
+      email_login_link: "https://your-staging-site.com/users/sign_in"
     )
 
 Details for account sets creation.
@@ -72,7 +88,7 @@ Details for account sets creation.
     - `:token_login_link` Link users must visit for token login
     - `:token_login_code` Code/Pin to be used to log in - token login - with any account from the account set
 
-#### Add account sets to Test Account configuration**
+#### Add account sets to Test Account configuration
 
 ```
 TestAccounts.configure do
@@ -96,7 +112,7 @@ One you finish the engine configuration you can start you development server `ra
 
 
 ## Contributing
-Open a PR.
+ We love pull requests from everyone.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
